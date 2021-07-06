@@ -1,0 +1,54 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Object Detection in densely populated retail images \n",
+    "\n",
+    "## Objectives\n",
+    "* Recognize the amount of products of each type in densely populated retail images \n",
+    "    1. Setting up an object detection model able  to recognize products on densely pupolated shelf images.\n",
+    "    2. Develop a clustering model that  segments the detected products into categories based on their similarity  \n",
+    "    \n",
+    "## Data \n",
+    "The data used for this project is SKU-110K a large collection of densely populated images of shelfs. The dataset weights 49,9 GBs and is conformed by 11,762 images with more than 1.7 million annotated bounding boxes. The data is splitted in train and test  with  a proportion of 80% for the first and 20% for the latest.  The images are in format **.jpg** and the annotations are in a **.csv** file ([Link to the dataset](https://drive.google.com/file/d/1iq93lCdhaPUN0fWbLieMtzfB1850pKwd/edit)).\n",
+    "### Sample images \n",
+    "![fimg](sku.jpeg)\n",
+    "## Design and development\n",
+    "Down below it can be observed the propused pipeline.  \n",
+    "![fimg](DetectionDenselyPopulatedImgs.png)\n",
+    "\n",
+    "The pipeline is composed mainly of three models:\n",
+    "1. Object detection model: This model will be in charge of outputing the bounding boxes that identify each object in an image. For this part of the project it was used the API of object detection of tensorflow and some specific implementations of some object detectation models. \n",
+    "2. CNN for feature extraction: This is a convolutional neural network without the classification. This network will be used to extract features from the images and generate a compat representation of the images and for this will be used  VGG16. \n",
+    "3. Clustering model: This model will group the objects based on their similarity. The model that will be use for this is k-means.  \n",
+    "\n",
+    "The first model will be evaluated with the metric mAP, while the last one will be evaluated with silhouette score. \n",
+    "## Results\n",
+    "At this moment the best result for the first part was achieve by the model CenterNet HourGlass104 Keypoints 1024x1024 which has a mAP of 0.35."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 4
+}
