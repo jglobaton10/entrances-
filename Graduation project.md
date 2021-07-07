@@ -85,7 +85,8 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   
   ![New Picture (7)](https://user-images.githubusercontent.com/47225250/124832672-fcfdd680-df4a-11eb-9744-ad0213912e6f.png)
   
-  The result of processing the data is a .csv file with 227167 instances and 11 columns. Each instance corresponds to 5 seconds of digitalized EEG signal. In regards to the labels the instances have the following distribution
+  The result of processing the data is a .csv file with 227167 instances and 11 columns. Each instance corresponds to 5 seconds of digitalized EEG signal. In regards to the labels the instances have the following distribution.
+  
   ![image](https://user-images.githubusercontent.com/47225250/124839876-a945ba00-df57-11eb-93de-973dbec4ffdd.png)
   
   ### Training of classification models
@@ -107,7 +108,16 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   
   ## Results 
   
- 
+  ### Scenario 1
+  In this scenario the most important feature is the number of spikes of type 1 and n_peaks. 
+  ![image](https://user-images.githubusercontent.com/47225250/124841626-acdb4000-df5b-11eb-9cf9-e8963b5c7468.png)
+   
+  
+  ### Scenario 2
+  In this case, the most important features are those related with the power in the different bands. In this case the most important is the gamma power.   
+  ![image](https://user-images.githubusercontent.com/47225250/124841657-ba90c580-df5b-11eb-9e9e-fc6fb65b89e1.png)
+  
+The whole document can be seen the following [link](https://drive.google.com/file/d/12vShKLpNOPJgqLowIJrtdsnZZcULjBnp/view?usp=sharing)
     
     
     
