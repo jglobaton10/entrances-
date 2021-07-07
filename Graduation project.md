@@ -40,7 +40,15 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   The result of processing the data is a .csv file which contains 3602157 of instances and 4 columns.Each instance in this file represents a epileptic spike. Down below it can be see a box diagram of the data. 
 
 ![image](https://user-images.githubusercontent.com/47225250/124827785-71814700-df44-11eb-8d0b-2584086dd461.png)
+   All the columns contain outlayers. However, it is decided that they will not be removed because they might have relevancy for predicting the crisis.  
+ 
+ 
+  ### Phase 2 - Training of clustering models 
+  Previously to train the models  the data was normalized using  a **MinMaxScaler** from sklearn, which used the next formula. 
+  ![image](https://user-images.githubusercontent.com/47225250/124828427-3f241980-df45-11eb-9643-c022ca6f8bd9.png)
 
+  
+ 
     
     
     
