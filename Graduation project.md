@@ -99,6 +99,7 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   - min_sample_split
   - n_stimators: Only for RandomForestClassifier
   The models with the best parameters using the f1_score as evaluation metric are shown down below.
+  
   ![image](https://user-images.githubusercontent.com/47225250/124841202-b4e6b000-df5a-11eb-80e7-d665e41f6153.png)
   ![image](https://user-images.githubusercontent.com/47225250/124841272-da73b980-df5a-11eb-9075-195af7b1cf23.png)
   
