@@ -30,6 +30,6 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
 ## Development
 
   ### Phase 1 - Identification of epileptic spikes using clustering models on EEG data 
-    #### Data processing 
+    Data processing 
     The characterization of a spike is defined based on the next 4 variables 
 
