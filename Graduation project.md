@@ -30,14 +30,14 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
 ## Development
 
   ### Phase 1 - Identification of epileptic spikes using clustering models on EEG data 
-  ####Data processing 
-    The characterization of a spike is defined based on the next 4 variables:
-      - initial_peak: It makes reference to the positive peak of the spike. 
-      - final_peak: It is the negative peak of the spike.
-      - width: It measures the duration of the spike.
-      - height: It measures the potencial of the positive pike. 
+  ### Data processing 
+  The characterization of a spike is defined based on the next 4 variables:
+  - initial_peak: It makes reference to the positive peak of the spike. 
+  - final_peak: It is the negative peak of the spike.
+  - width: It measures the duration of the spike.
+  - height: It measures the potencial of the positive pike. 
     
-    The result of processing the data is a .csv file which contains 3602157 of instances and 4 columns.Each instance in this file represents a epileptic spike. Down below it can be see a box diagram of the data. 
+  The result of processing the data is a .csv file which contains 3602157 of instances and 4 columns.Each instance in this file represents a epileptic spike. Down below it can be see a box diagram of the data. 
 
 ![image](https://user-images.githubusercontent.com/47225250/124827785-71814700-df44-11eb-8d0b-2584086dd461.png)
 
