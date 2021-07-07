@@ -117,11 +117,17 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   In this case, the most important features are those related with the power in the different bands. In this case the most important is the gamma power.   
   ![image](https://user-images.githubusercontent.com/47225250/124841657-ba90c580-df5b-11eb-9e9e-fc6fb65b89e1.png)
   
-The whole document can be seen the following [link](https://drive.google.com/file/d/12vShKLpNOPJgqLowIJrtdsnZZcULjBnp/view?usp=sharing)
+
+   
+   ### Conclusions 
+   
+   1.  4 types of epileptic spikes were identified using the clustering models.
+   2.  2 study scenarios were generated based on the definition of the target variable and for both scenarios the best model was RandomForestClassifier based on the metric f1_score. 
+   3.   The f1_score were 0.60 for the scenario 1 and 0.62 for the scenario 2.
+   4.   For both scenarios it was identified that the spikes are a significative factor when predicting crisis. However in the first scenatio the spikes are more significative. 
     
     
-    
-    
+   The whole document can be seen the following [link](https://drive.google.com/file/d/12vShKLpNOPJgqLowIJrtdsnZZcULjBnp/view?usp=sharing) (Witten in Spanish).
       
       
     
