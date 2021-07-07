@@ -44,9 +44,20 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
  
  
   ### Phase 2 - Training of clustering models 
-  Previously to train the models  the data was normalized using  a **MinMaxScaler** from sklearn, which used the next formula. 
+  Previously to train the models  the data was normalized using  a **MinMaxScaler** from sklearn, which uses the next formula. 
   ![image](https://user-images.githubusercontent.com/47225250/124828427-3f241980-df45-11eb-9643-c022ca6f8bd9.png)
 
+  Based on the state of the art the best model for the clustering spikes was affinity propagation, but the  data set is too large and training that model with a sample of only 500000 instances takes around 5 hours. Therefore, it is used **k-means** and **AgglomerativeClustering**. The models are evaluated using the silhoute coefficient.
+![image](https://user-images.githubusercontent.com/47225250/124828822-c40f3300-df45-11eb-97f8-506b45c024fd.png)
+
+  The best result is obtained when the number of clusters is 4. Using this 4 different types of spikes were identify. 
+![image](https://user-images.githubusercontent.com/47225250/124829002-0769a180-df46-11eb-9c76-fdd747bbef38.png)
+
+  ### Phase 3 - Spikes characterization
+  ![image](https://user-images.githubusercontent.com/47225250/124829138-341db900-df46-11eb-9408-8ae55bb052b2.png)
+  ![image](https://user-images.githubusercontent.com/47225250/124829164-3ed84e00-df46-11eb-9903-2aaf2fc18867.png)
+
+  
   
  
     
