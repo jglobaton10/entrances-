@@ -25,7 +25,7 @@ on the prediction of the seizures generated.
   - The only data available comes from the researcg done by the Children's Hospital Boston.  
 
 ## Data 
-The data is composed of 664 files in **.edf** format, which contain difitalized signals of EEG, sampled to 256 samples per second and with a sesolution of 16 bits.  The files are grouped on  24 cwhich correspond to 23 pacients: 5 male which ages between 3 to 22 years and 17 women with ages between  1.5 to 19 years. Most of them are pediatric cases.
+The data is composed of 664 files in **.edf** format, which contain difitalized signals of EEG, sampled to 256 samples per second and with a sesolution of 16 bits.  The files are grouped on  24 cwhich correspond to 23 pacients: 5 male which ages between 3 to 22 years and 17 women with ages between  1.5 to 19 years. Most of them are pediatric cases. Each case contains 9 to 42 files and each files contains 23 EEG signals. Finally,  from 664 only 129 present at least one epileptic crisis. 
 
 ## Development
 
@@ -43,7 +43,7 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
    All the columns contain outlayers. However, it is decided that they will not be removed because they might have relevancy for predicting the crisis.  
  
  
-  ### Phase 2 - Training of clustering models 
+  ### Training of clustering models 
   Previously to train the models  the data was normalized using  a **MinMaxScaler** from sklearn, which uses the next formula. 
   ![image](https://user-images.githubusercontent.com/47225250/124828427-3f241980-df45-11eb-9643-c022ca6f8bd9.png)
 
@@ -53,11 +53,34 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   The best result is obtained when the number of clusters is 4. Using this 4 different types of spikes were identify. 
 ![image](https://user-images.githubusercontent.com/47225250/124829002-0769a180-df46-11eb-9c76-fdd747bbef38.png)
 
-  ### Phase 3 - Spikes characterization
-  ![image](https://user-images.githubusercontent.com/47225250/124829138-341db900-df46-11eb-9408-8ae55bb052b2.png)
+  ### Spikes characterization
+  ![image](https://user-images.githubusercontent.com/47225250/124829244-5d3e4980-df46-11eb-8a91-5e25cd39e4dc.png)
   ![image](https://user-images.githubusercontent.com/47225250/124829164-3ed84e00-df46-11eb-9903-2aaf2fc18867.png)
-
   
+  ### Phase 2 - Predicting epileptic crisis using machine learning models for classification
+  The goal of this part of the project is being able to predict the different states of an epileptic crisis. With this in mind two different scenarios were stablished. In the fisr the objective variable can take for different values: normal, pre_ictal, ictal and inter_ictal. While in the second the objective variable can only take the values normal and pre_ictal.  The goal of the first scneratio is to evalue the importance of the different variables having the four states. The objective of the second one is to  decide which variables are more relevant when deciding if a pacient is about to have an epileptic crisis.  
+  
+  ### Data processing 
+  
+  The characterization of the waves was made based on the next variables:
+  - Number of spikes 
+  - Potency in the band α
+  - Potency in the band δ
+  - Potency in the band γ
+  - Potency in the band θ
+  - Number of peaks 
+  - Number of type 1 spikes 
+  - Number of type 2 spikes 
+  - Number of type 3 spikes 
+  - Number of type 4 spikes 
+  - label
+  
+  For this part of the project two algorithms were developed. One of the other will be applied depending wether the file has an epileptic crisis or no.  
+  
+  Files with no epileptic crisis 
+  ![New Picture (6)](https://user-images.githubusercontent.com/47225250/124831887-db501f80-df49-11eb-833b-2f0c9ad4827b.png)
+  Files with epileptic crisis 
+
   
  
     
