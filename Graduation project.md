@@ -40,7 +40,7 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   The result of processing the data is a .csv file which contains 3602157 of instances and 4 columns.Each instance in this file represents a epileptic spike. Down below it can be see a box diagram of the data. 
 
 ![image](https://user-images.githubusercontent.com/47225250/124827785-71814700-df44-11eb-8d0b-2584086dd461.png)
-   All the columns contain outlayers. However, it is decided that they will not be removed because they might have relevancy for predicting the crisis.  
+   All the columns contain outlayers. However, it was decided that they will not be removed because they might have relevancy for predicting the crisis.  
  
  
   ### Training of clustering models 
@@ -77,15 +77,34 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   
   For this part of the project two algorithms were developed. One of the other will be applied depending wether the file has an epileptic crisis or no.  
   
-  Algorith for files with no epileptic crisis 
+  Algorithm for files with no epileptic crisis 
   
   ![New Picture (8)](https://user-images.githubusercontent.com/47225250/124832685-05eea800-df4b-11eb-8988-363c69b872ed.png)
   
-  Algorith for files with epileptic crisis 
+  Algorithm for files with epileptic crisis 
   
   ![New Picture (7)](https://user-images.githubusercontent.com/47225250/124832672-fcfdd680-df4a-11eb-9744-ad0213912e6f.png)
-
-
+  
+  The result of processing the data is a .csv file with 227167 instances and 11 columns. Each instance corresponds to 5 seconds of digitalized EEG signal. In regards to the labels the instances have the following distribution
+  ![image](https://user-images.githubusercontent.com/47225250/124839876-a945ba00-df57-11eb-93de-973dbec4ffdd.png)
+  
+  ### Training of classification models
+  Before of training the models the data was normalize with a MinMaxScaler. Additionally, the data was splitted in train and test with 20% for test.  For this project the models chose were DecissionTreeClassifier and RandomForestClassifier from **sklearn** for both scenarios.  
+  
+  The parameters that will be tunned with **GridSearchCV** are:
+  - criterion
+  - splitter
+  - max_depth
+  - max_features
+  - min_sample_split
+  - n_stimators: Only for RandomForestClassifier
+  The models with the best parameters using the f1_score as evaluation metric are shown down below.
+  ![image](https://user-images.githubusercontent.com/47225250/124841202-b4e6b000-df5a-11eb-80e7-d665e41f6153.png)
+  ![image](https://user-images.githubusercontent.com/47225250/124841272-da73b980-df5a-11eb-9075-195af7b1cf23.png)
+  
+  Based on these results the best model is RandomForestClassifier in both scenarios. 
+  
+  ## Results 
   
  
     
