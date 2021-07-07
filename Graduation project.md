@@ -77,9 +77,14 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
   
   For this part of the project two algorithms were developed. One of the other will be applied depending wether the file has an epileptic crisis or no.  
   
-  Files with no epileptic crisis 
-  ![New Picture (6)](https://user-images.githubusercontent.com/47225250/124831887-db501f80-df49-11eb-833b-2f0c9ad4827b.png)
-  Files with epileptic crisis 
+  Algorith for files with no epileptic crisis 
+  
+  ![New Picture (8)](https://user-images.githubusercontent.com/47225250/124832685-05eea800-df4b-11eb-8988-363c69b872ed.png)
+  
+  Algorith for files with epileptic crisis 
+  
+  ![New Picture (7)](https://user-images.githubusercontent.com/47225250/124832672-fcfdd680-df4a-11eb-9744-ad0213912e6f.png)
+
 
   
  
