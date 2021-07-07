@@ -37,7 +37,8 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
       - width: It measures the duration of the spike.
       - height: It measures the potencial of the positive pike. 
     
-    The result of processing the data is a .csv file which contains 3602157 of instances and 4 columns. Each instance in this file represents a epileptic spike. Down below it can be see a box diagram of the data. 
+    The result of processing the data is a .csv file which contains 3602157 of instances and 4 columns.
+    Each instance in this file represents a epileptic spike. Down below it can be see a box diagram of the data. 
 
 ![image](https://user-images.githubusercontent.com/47225250/124827785-71814700-df44-11eb-8d0b-2584086dd461.png)
 
