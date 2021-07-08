@@ -14,7 +14,7 @@ The data used for this project is SKU-110K a large collection of densely populat
 Down below it can be observed the propused pipeline.
 
 
-![New Picture](https://user-images.githubusercontent.com/47225250/124989875-9f7e8e00-e00d-11eb-8c76-9ab11c013dd0.png)
+![image](https://user-images.githubusercontent.com/47225250/124990051-d9e82b00-e00d-11eb-99fa-fb3fc962e905.png)
 The pipeline is composed mainly of three models:
 1. Object detection model: This model will be in charge of outputing the bounding boxes that identify each object in an image. For this part of the project it was used the API of object detection of tensorflow and some specific implementations of some object detectation models. 
 2. CNN for feature extraction: This is a convolutional neural network without the classification. This network will be used to extract features from the images and generate a compat representation of the images and for this will be used  VGG16. 
