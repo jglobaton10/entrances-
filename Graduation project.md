@@ -129,6 +129,10 @@ The data is composed of 664 files in **.edf** format, which contain difitalized 
     
    The whole document can be seen the following [link](https://drive.google.com/file/d/12vShKLpNOPJgqLowIJrtdsnZZcULjBnp/view?usp=sharing) (Witten in Spanish).
       
-      
+   Files 
+   
+   - [Data processing](https://github.com/jglobaton10/entrances-/blob/main/Graduation%20project%20files/Procesamiento_de_datos.ipynb)
+   - [Scenario 1](https://github.com/jglobaton10/entrances-/blob/main/Graduation%20project%20files/Escenario_1.ipynb)
+   - [Scenario 2](https://github.com/jglobaton10/entrances-/blob/main/Graduation%20project%20files/Escenario_2.ipynb)
     
 
