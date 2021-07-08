@@ -1,0 +1,292 @@
+---
+title: "Capstone part 1"
+author: "Juan Guillermo Lobaton Galindo"
+date: "20/6/2021"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Scenario
+You are a junior data analyst working in the marketing analyst team at Cyclistic, a bike-share company in Chicago. The director of
+marketing believes the company’s future success depends on maximizing the number of annual memberships. Therefore, your
+team wants to understand how casual riders and annual members use Cyclistic bikes dierently
+
+# Stakeholders 
+
+* Cyclists: The customers of cyclistic.
+* Lily Moreno: Director of marketing. 
+* Cyclistic Marketing Analytics Team: A team of data analysts who are responsible for collecting, analyzing, and reporting
+data that helps guide Cyclistic marketing strategy. 
+* Cyclistic Executive Team: Executive team that approves recommendations. 
+
+
+# Bussiness Task 
+
+***Analysing Cycliistic´s  historial data in order to find insights that allow the company to understand the behavior of casual riders and members. And that ultimately lead to discover ways of increasing the conversion rate*** 
+
+# Description of the data 
+
+The data set is conformed by 6 files in .csv format. Each file has 16 columns  and  an average of 80000 rows. All the columns in the file are categorical. Each observation on these files represent one ride in a bike made by a customer from one Station to another one in Chicago. Each observation holds information about the identifier of the trip, the start date, the end date, the start station and the end station.  
+
+--- 
+
+# Data preparation process
+## Libraries 
+
+```{r Importfiles}
+
+library(readr)
+library(ggplot2)
+library(tidyr)
+library(dplyr)
+library(corrplot)
+library(GGally)
+library(forcats)
+library(data.table)
+library(viridis)
+```
+
+
+
+
+
+## Data cleaning process 
+
+In this phase of the project it is necessary to ensure the quality of the data that is going to be analyze. Therefore the needs point are going to be considered:
+
+1. Formatting 
+2. Choosing the relevant data
+3. Checking and adjusting the data types 
+4. Handling missing values
+5. Handling duplicates
+
+
+
+### 1. Formatting 
+
+The idea of this step is to give data tabular form. Because this will make it easier to handle. In thid case it is used the function **read_csv** that takes a .csv file and load it as a dataframe.  
+
+```{r Import files, include=FALSE}
+path = "C:/Users/jglob/Desktop/Capstone_Data"
+file_names <- list.files(path, pattern=".csv" , all.files=TRUE, full.names=TRUE)
+
+df <- read_csv("C:/Users/jglob/Desktop/202004-divvy-tripdata.csv")
+for (name in  file_names){
+  df <- rbind( df , read_csv(name))
+  
+}
+head(df)
+```
+### 2. Choosing the relevant data
+
+The column ride_id is removed because it does not have any relevant information. Because each value in this column is unique.      
+```{r}
+df <- df %>% select(-ride_id)
+head(df)
+```
+
+Here the date-time columns  started_at and  ended_at were split  into date and time columns. Also it was created an extra column to  store the total time of each travel in seconds.
+
+```{r}
+
+df$start_date <- as.Date(df$started_at)
+df$start_time <- format(as.POSIXct(df$started_at), format = "%H:%M:%S") 
+
+df$day<-format(df$start_date , format="%d")
+df$month<-format(df$start_date , format="%m")
+
+df$end_date <- as.Date(df$ended_at)  
+df$end_time <- format(as.POSIXct(df$ended_at), format = "%H:%M:%S") 
+
+df$total_travel_time <- df$ended_at -  df$started_at
+
+head(df)
+```
+
+
+
+### 3. Checking and adjusting data types
+```{r}
+str(df)
+
+class(df$start_station_id) = "character"
+class(df$end_station_id) = "character"
+class(df$total_travel_time) = "numeric"
+
+df$total_travel_time_hours <- df$total_travel_time %/% 3600
+```
+The columns that represent the ids of the stations were converted to  characters
+
+### 4. Missig values 
+#### Number of missing values 
+```{r}
+
+sum(!complete.cases(df))
+
+```
+
+#### percentage of rows that have at least 1 missing value. 
+```{r}
+
+sum(!complete.cases(df))/nrow(df)
+df <- drop_na(df)
+
+```
+
+In this case the missing values were removed because they represent less than the 3% of the total data. 
+
+### 5. Handling duplicates
+
+First, it is checked whether the data set has any duplicates. In th affirmative case, the duplicated entries will be removed,  
+```{r}
+sum(duplicated(df)) 
+
+```
+The number of  duplicated entries is zero. Hence, no actions are taken. 
+
+## EDA 
+
+### Univariate analysis 
+#### Variable member_casual
+```{r}
+group_by(df, member_casual) %>% tally()  %>% ggplot(  aes(reorder(member_casual, n), n)) + geom_bar(stat="identity")+ geom_text(aes(label = n, x = member_casual, y = n), position = position_dodge(width = 0.8), vjust = -0.3) + labs(title = " Distribution of types of user" , x = "User time", y = "Number of users" , caption = "There is a imbalance of around 9% in the classes in favor of the value member.  ")
+
+
+```
+#### Varaible rideable_type
+```{r message=FALSE, warning=FALSE}
+
+group_by(df, rideable_type) %>% tally()  %>% ggplot(  aes(reorder(rideable_type, n), n)) + geom_bar(stat="identity")+ geom_text(aes(label = n, x = rideable_type, y = n), position = position_dodge(width = 0.8), vjust = -0.2) +labs(title = " Distribution of types of bikes used in rides" , x = "Type of bike", y = "Times used", caption = "By far the prefered type of bikes by user is docked bikes" )
+
+
+```
+
+#### Variable start_station_name
+```{r }
+
+stations <- group_by(df, start_station_name) %>% tally() 
+stations[order(-stations$n),] %>%  slice(1:30) %>% ggplot() + geom_bar(aes(reorder(start_station_name, n), n) ,stat="identity") + theme(axis.text.x = element_text(angle = 90)) + labs(title = "Number of rides per starting station", x = "Starting station", y = "Number of rides")
+```
+#### Variable end_station_name
+```{r }
+stations_end <- group_by(df, end_station_name) %>% tally() 
+stations_end[order(-stations_end$n),] %>%  slice(1:30) %>% ggplot() + geom_bar(aes(reorder(end_station_name, n), n), stat="identity") + theme(axis.text.x = element_text(angle = 90))  + labs(title = "Number of travels per ending station",x = "Ending station")
+
+```
+
+#### Variable month
+```{r}
+group_by(df, month) %>% tally()  %>% ggplot(aes(x=month, y = n)) + geom_bar(stat="identity")+ geom_text(aes(label = n, x = month, y = n), position = position_dodge(width = 0.8), vjust = -0.2) + labs(title = "Bike rides  per month", y = "Number of rides", x = "Month" )
+
+```
+
+#### Variable total_travel_time_hours
+```{r warning=FALSE}
+group_by(df, total_travel_time_hours) %>% tally()  %>% ggplot(aes(x=total_travel_time_hours, y = n)) + geom_bar(stat="identity") + labs(title = "Bike rides  per month", y = "Number of rides", x = "travel_time" ) + xlim(-10, 100) + ylim(0, 40000)
+
+
+df <- df[df$total_travel_time >  0,]
+```
+Analysing the plot it was discovered that the dataset has rides with negative times. Therefore such observations will be removed. 
+
+```{r}
+#write.csv(df, "C:/Users/jglob/Desktop/Capstone_Data/bikes_rides_data_cleaned_vfinal.csv")
+#head(df)
+```
+
+Further cleaning was done to the dataset once it was loaded in tableau. First, the stations had different longitudes and latitudes associated. To solve that issue  the columns start_latitude_cal, start_longitude_cal, end_long_cal and end_lat_cal were added which establish only one pair of coordinates for each station. 
+
+# key findings
+* In the last six months the company has sold 2.2 millions rides, 54.83% were taken by members, while 45.16% were taken by casual users.  
+
+*  Both type of users prefer the most docked bikes for their rides. Also, there is not a significative difference  between  the usage of electric bikes in both type of users. 
+
+* In more than **50%** of the stations the number of rides done by members is higher in comparison with casual users. Additionally, member prefer to take rides in the city,  whereas casual have a preference for the coast, specially in Streeterville and Chicago Loop. 
+
+* The number of rides seems to have a constant tendency in all the days of the month, from 1 to 31. On the other hand, Mondays and Tuesdays show the highest number of rides.
+
+* Members prefer shorter travels in comparison with casual users. The first ones have an average ride time of 12 minutes, while second ones have and average of 24 minutes.
+
+* Finally, there are some tours which seem to be exclusive of one of type of user.  
+
+# Recommendations 
+
+The following recommendations have as objective increase the number of casual user whom turn members:
+
+* Including with the membership advantages for those users whom ride to places such Streeterville and Chicago Loop, disccounts or free rides to those two destinations. 
+* Including discounts in the membership for those users that like to ride on Monday and Tuesday and also for those who like long rides.
+* Identify which  tours are exclusive of which type  of user and put advantages related with them in the membership. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
